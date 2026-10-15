@@ -1,4 +1,14 @@
-# Submission/File Service Mini-LMS
+# P06.2 — Prototipe Submission/File Service (Mini-LMS)
+
+## Identitas Kelompok
+
+**Kelompok 2**
+
+| No. | Nama Anggota | NIM |
+|---|---|---|
+| 1 | Mursalina | 230209500074 |
+| 2 | Putri Salsabilah | 240209501045 |
+| 3 | Putri Ayu Auliah | 240209501064 |
 
 ## Deskripsi
 
@@ -39,12 +49,12 @@ Submission_File_Service_Mini_LMS/
 ├── data/
 │   └── submissions/
 ├── docs/
-│   ├── KONTRAK_API.md
-│   └── LAPORAN_KELOMPOK.md
+│   └── KONTRAK_API.md
 ├── postman/
 │   └── Submission_File_Service.postman_collection.json
-├── bukti pengujian/
+├── screenshots/
 ├── Jalankan_Service.bat
+├── Pembagian_Kontribusi_Anggota.docx
 └── README.md
 ```
 
@@ -73,6 +83,7 @@ Port `8105` digunakan dalam konfigurasi proyek ini. Jika port diganti, sesuaikan
 ## Endpoint API
 
 | Method | Endpoint | Keterangan | Status sukses |
+|---|---|---|---|
 | GET | `/health` | Pemeriksaan respons dasar service | `200 OK` |
 | POST | `/api/submissions` | Membuat dan menyimpan metadata pengumpulan | `201 Created` |
 | GET | `/api/submissions/{id}` | Membaca metadata berdasarkan `submission_id` | `200 OK` |
@@ -102,13 +113,14 @@ Apabila valid, service mengembalikan **`201 Created`** dan objek `data` yang mem
 Impor file `postman/Submission_File_Service.postman_collection.json` melalui menu **Import** di Postman. Gunakan Body **raw → JSON** pada operasi POST.
 
 | Skenario | Input/kondisi | Status yang diharapkan |
+|---|---|---|
 | Permintaan valid | `assignment_id: 501` dan seluruh field wajib lengkap | `201 Created` |
 | Assignment tidak ditemukan | `assignment_id: 999` dengan field lainnya lengkap | `404 Not Found` |
 | Input tidak lengkap | Hanya mengirim `student_id` | `400 Bad Request` |
 | Baca submission | GET menggunakan `submission_id` dari POST berhasil | `200 OK` |
 | Baca metadata file | GET menggunakan `file_id` dari POST berhasil | `200 OK` |
 
-Bukti tiga skenario utama (201, 404, dan 400) disimpan sebagai tangkapan layar Postman pada folder `bukti pengujian/`. Screenshot harus memperlihatkan method, URL, data request (jika relevan), HTTP status, dan response.
+Bukti tiga skenario utama (201, 404, dan 400) disimpan sebagai tangkapan layar Postman pada folder `screenshots/`. Screenshot harus memperlihatkan method, URL, data request (jika relevan), HTTP status, dan response.
 
 ## Model Penyimpanan dan Identifier
 
@@ -123,4 +135,5 @@ Batas validasi contoh adalah **5 MiB** berdasarkan nilai `file_size` yang dinyat
 ## Batasan Implementasi
 
 Prototipe ini dibatasi pada penyimpanan metadata JSON lokal. Layanan belum mencakup upload/download byte file fisik, penyimpanan database produksi, autentikasi pengguna, atau pemanggilan HTTP ke Assignment Service yang sesungguhnya. Data assignment saat ini disimulasikan dengan file konfigurasi lokal.
+
 Untuk pengembangan berikutnya, service dapat diintegrasikan dengan Assignment Service, menambahkan upload file fisik dan validasi konten, serta menerapkan kontrol akses dan penyimpanan yang lebih andal.
